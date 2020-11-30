@@ -1,0 +1,26 @@
+<launch>
+<node pkg="demo_range_combiner" type="demo_range_combiner_node" name="RL" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="PHYSICAL_RANGE" />
+  <param name="~input2" value="VIRTUAL_RANGE" />
+  <param name="~output1" value="FINAL_RANGE" />
+  <param name="~mode" value="1" />
+  <param name="~minRange" value="15.0" />
+  <param name="~maxRange" value="150.0" />
+  <param name="~offset" value="13.97" />
+</node>
+<node pkg="demo_heading_combiner" type="demo_heading_combiner_node" name="HL" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="PHYSICAL_HEADING" />
+  <param name="~input2" value="VIRTUAL_HEADING" />
+  <param name="~output1" value="FINAL_HEADING" /> 
+  <param name="~mode" value="0" />
+</node>
+<node pkg="demo_virtual_env" type="demo_virtual_env_node" name="ENV" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="FINAL_HEADING" />
+  <param name="~output1" value="VIRTUAL_RANGE" />
+  <param name="~output2" value="VIRTUAL_ANGLE" />
+</node>
+<node pkg="demo_sense_plot_qt" type="demo_sense_plot_qt_node" name="SENSE" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~input1" value="FINAL_RANGE" />
+  <param name="~input2" value="FINAL_HEADING" /> 
+</node>
+</launch>

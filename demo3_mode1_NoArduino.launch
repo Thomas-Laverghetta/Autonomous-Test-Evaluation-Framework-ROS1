@@ -1,0 +1,36 @@
+<launch>
+# <node pkg="rosserial_python" type="serial_node.py" name="SERIAL" output="screen" launch-prefix="xterm -e " >
+#   <param name="~port" value="/dev/ttyACM0" />
+# </node>
+<node pkg="demo_virtual_heading" type="demo_virtual_heading_node" name="VH" output="screen" launch-prefix="xterm -e " >
+  <param name="~output" value="VIRTUAL_HEADING" /> 
+</node>
+<node pkg="demo_range_combiner" type="demo_range_combiner_node" name="RL" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="PHYSICAL_RANGE" />
+  <param name="~input2" value="VIRTUAL_RANGE" />
+  <param name="~output1" value="FINAL_RANGE" />
+  <param name="~mode" value="1" />
+  <param name="~minRange" value="10.0" />
+  <param name="~maxRange" value="300.0" />
+  <param name="~offset" value="13.97" />
+</node>
+<node pkg="demo_heading_combiner" type="demo_heading_combiner_node" name="HL" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="PHYSICAL_HEADING" />
+  <param name="~input2" value="VIRTUAL_HEADING" />
+  <param name="~output1" value="FINAL_HEADING" /> 
+  <param name="~mode" value="1" />
+</node>
+<node pkg="demo_virtual_env" type="demo_virtual_env_node" name="ENV" output="screen" launch-prefix="xterm -e " >
+  <param name="~input1" value="FINAL_HEADING" />
+  <param name="~output1" value="VIRTUAL_RANGE" />
+  <param name="~output2" value="VIRTUAL_ANGLE" />
+</node>
+<node pkg="demo_sense_objects" type="demo_sense_objects_node" name="SENSE" output="screen" launch-prefix="xterm -e " >	
+  <param name="~input1" value="FINAL_RANGE" />
+  <param name="~input2" value="FINAL_HEADING" /> 
+  <param name="~output1" value="SENSED_OBJECTS" /> 
+</node>
+<node pkg="demo_plot_objects_qt" type="demo_plot_objects_qt_node" name="PLOT" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~input1" value="SENSED_OBJECTS" />  
+</node>
+</launch>

@@ -1,0 +1,32 @@
+<launch>
+<node pkg="demo4_detection_combiner" type="demo4_detection_combiner_node" name="DC" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="PHYSICAL_OBJECT" />
+  <param name="~input2" value="VIRTUAL_OBJECT" />
+  <param name="~output1" value="FINAL_OBJECT" />
+  <param name="~mode" value="1" />
+</node>
+<node pkg="demo4_planner" type="demo4_planner_node" name="PLAN" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="FINAL_OBJECT" />  
+  <param name="~input2" value="VIRTUAL_LOCATION" />
+  <param name="~output1" value="WHEELS" /> 
+</node>
+<node pkg="demo4_wheels_splitter" type="demo4_wheels_splitter_node" name="WS" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="WHEELS" />
+  <param name="~output1" value="PHYSICAL_WHEELS" />
+  <param name="~output2" value="VIRTUAL_WHEELS" />
+  <param name="~mode" value="1" />
+</node>
+<node pkg="demo4_rover_sim" type="demo4_rover_sim_node" name="ROVER" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="VIRTUAL_WHEELS" />  
+  <param name="~output1" value="VIRTUAL_LOCATION" /> 
+</node>
+<node pkg="demo4_virtual_env" type="demo4_virtual_env_node" name="ENV" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="VIRTUAL_LOCATION" />
+  <param name="~output1" value="VIRTUAL_OBJECT" />  
+  <param name="~output2" value="OBSTACLE" /> 
+</node>
+<node pkg="demo4_viz" type="demo4_viz_node" name="VIZ" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="VIRTUAL_LOCATION" />
+  <param name="~input2" value="OBSTACLE" />
+</node>
+</launch>

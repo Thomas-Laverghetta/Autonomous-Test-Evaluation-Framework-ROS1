@@ -1,0 +1,14 @@
+<launch>
+<node pkg="demo_dumb_controller" type="demo_dumb_controller_node" name="CONTROL" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~output1" value="LOCATION" />
+  <param name="~input1"  value="WHEELS"   />
+</node>
+<node pkg="demo_PID_Controller" type="demo_PID_Controller_node" name="PID" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~output1" value="WHEELS" />
+  <param name="~input1" value="SENSEARRAY" />
+</node>
+<node pkg="demo_virtual_env_PID" type="demo_virtual_env_PID_node" name="ENV" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~output1" value="SENSEARRAY" />
+  <param name="~input1" value="LOCATION" />
+</node>
+</launch>

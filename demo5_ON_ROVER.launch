@@ -1,0 +1,14 @@
+<launch>
+<node pkg="rosserial_python" type="serial_node.py" name="SERIAL" output="screen" launch-prefix="xterm -e " >
+  <param name="~port" value="/dev/ttyACM0" />
+</node>
+<!-- <node pkg="demo5_rover_controller" type="demo5_rover_controller_node" name="CONTROL" output="screen" required="true" launch-prefix="xterm -e " >
+  <param name="~output1" value="WHEELS" />
+</node> -->
+<node pkg="demo4_wheels_splitter" type="demo4_wheels_splitter_node" name="WS" output="screen" launch-prefix="xterm -e " required="true">
+  <param name="~input1" value="WHEELS" />
+  <param name="~output1" value="PHYSICAL_WHEELS" />
+  <param name="~output2" value="VIRTUAL_WHEELS" />
+  <param name="~mode" value="2" />
+</node>
+</launch>

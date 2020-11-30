@@ -1,0 +1,4 @@
+<launch>
+<node pkg="demo_virtual_env" type="demo_virtual_env_node" name="ENV" output="screen" launch-prefix="xterm -e " >
+</node>
+</launch>

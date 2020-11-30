@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<objects>
+  <line a="-0.5" b="1.0" c="-100" minX="-150.0" maxX="150.0" minY="-180.0" maxY="150.0"></line>
+  <quadraticX s="-0.1" t="0.0" u="1.0" v="70.0" minX="-1000.0" maxX="1000.0" minY="-1000.0" maxY="1000.0"></quadraticX>
+  <ellipseX H="0" K="0" A="35.0" B="70.0"></ellipseX>
+</objects>
+
+
+
+

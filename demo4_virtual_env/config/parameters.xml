@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<parameters>
+  <environment maxRange="20.0" fieldOfView="30.0" update="0.1"></environment>
+  <random number="10" minX="-60.0" maxX="60.0" minY="-60.0" maxY="60.0"></random>
+  <line a="0.0" b="1.0" c="100" minX="-100.0" maxX="100.0" minY="-120.0" maxY="120.0"></line>
+  <line a="0.0" b="1.0" c="-100" minX="-100.0" maxX="100.0" minY="-120.0" maxY="120.0"></line>
+  <line a="1.0" b="0.0" c="-100" minX="-120.0" maxX="120.0" minY="-100.0" maxY="100.0"></line>
+  <line a="1.0" b="0.0" c="100" minX="-120.0" maxX="120.0" minY="-100.0" maxY="100.0"></line>
+</parameters>
+
+
+
+
