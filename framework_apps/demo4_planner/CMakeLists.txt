@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 
 ## Declare ROS package name
-project(demo_clock_library)
+project(demo4_planner)
 
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -17,18 +17,20 @@ add_compile_options(-std=c++11)
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
-catkin_package(
-INCLUDE_DIRS include
-LIBRARIES demo_clock_library
-#  CATKIN_DEPENDS std_msgs
-#  DEPENDS system_lib
-)
+catkin_package( ) 
 
 
 ## Link to ROS libraries
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  atef_node
+  demo_float_object
+  demo_wheel_action
+  demo_detected_object
+  demo_location_object
+  demo_clock_library
+  keyboard_input
 )
 
 
@@ -36,6 +38,13 @@ find_package(catkin REQUIRED COMPONENTS
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${atef_node_INCLUDE_DIRS}
+  ${demo_float_object_INCLUDE_DIRS}
+  ${demo_wheel_action_INCLUDE_DIRS}
+  ${demo_detected_object_INCLUDE_DIRS}  
+  ${demo_location_object_INCLUDE_DIRS}  
+  ${demo_clock_library_INCLUDE_DIRS}  
+  ${keyboard_input_INCLUDE_DIRS} 
 )
 
 
@@ -44,13 +53,20 @@ link_directories(
 )
 
 
-## Declare a C++ library
+## Declare a C++ executable
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
-add_library(${PROJECT_NAME} ${SOURCES})
+add_executable(${PROJECT_NAME}_node ${SOURCES})
 
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+  ${atef_node_LIBRARIES}
+  ${demo_float_object_LIBRARIES}
+  ${demo_wheel_action_LIBRARIES}
+  ${demo_detected_object_LIBRARIES}
+  ${demo_location_object_LIBRARIES}
+  ${demo_clock_library_LIBRARIES}
+  ${keyboard_input_LIBRARIES}  
 )
 

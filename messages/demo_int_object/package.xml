@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>demo_clock_library</name>
+  <name>demo_int_object</name>
   <version>0.0.0</version>
-  <description>System time checking functionality.</description>
+  <description>Int Serial Object.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->

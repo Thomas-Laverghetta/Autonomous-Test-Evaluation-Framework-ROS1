@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 
 ## Declare ROS package name
-project(demo_clock_library)
+project(atef_splitter)
 
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -19,7 +19,7 @@ add_compile_options(-std=c++11)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 INCLUDE_DIRS include
-LIBRARIES demo_clock_library
+LIBRARIES atef_splitter
 #  CATKIN_DEPENDS std_msgs
 #  DEPENDS system_lib
 )
@@ -29,6 +29,7 @@ LIBRARIES demo_clock_library
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  atef_node
 )
 
 
@@ -36,6 +37,7 @@ find_package(catkin REQUIRED COMPONENTS
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${atef_node_INCLUDE_DIRS}
 )
 
 
@@ -52,5 +54,6 @@ add_library(${PROJECT_NAME} ${SOURCES})
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}
   ${catkin_LIBRARIES}
+  ${atef_node_LIBRARIES}
 )
 

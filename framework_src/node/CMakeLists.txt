@@ -1,12 +1,15 @@
 cmake_minimum_required(VERSION 2.8.3)
+project(atef_node)
 
-## Declare ROS package name
-project(demo_clock_library)
+# Compile as C++11, supported in ROS Kinetic and newer
+ add_compile_options(-std=c++11)
 
-
-## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
-
+## Find catkin macros and libraries
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  keyboard_input
+  std_msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -19,38 +22,32 @@ add_compile_options(-std=c++11)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 INCLUDE_DIRS include
-LIBRARIES demo_clock_library
+LIBRARIES atef_node
 #  CATKIN_DEPENDS std_msgs
 #  DEPENDS system_lib
 )
 
 
-## Link to ROS libraries
-find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-)
-
-
 ## Specify additional locations of header files
+## Your package locations should be listed before other locations
 include_directories(
-  include
+  include 
   ${catkin_INCLUDE_DIRS}
+  ${keyboard_input_INCLUDE_DIRS} 
 )
 
-
-## directories for other necessary libraries
-link_directories(
-)
-
-
-## Declare a C++ library
+# Declare a C++ library
 file(GLOB_RECURSE SOURCES RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} FOLLOW_SYMLINKS src/*.cpp)
 add_library(${PROJECT_NAME} ${SOURCES})
 
+## Add cmake target dependencies of the library
+## as an example, code may need to be generated before libraries
+## either from message generation or dynamic reconfigure
+#add_dependencies(${PROJECT_NAME} ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}
-  ${catkin_LIBRARIES}
+# Specify libraries to link a library or executable target against
+target_link_libraries(${PROJECT_NAME} 
+${catkin_LIBRARIES}
+${keyboard_input_LIBRARIES}  
 )
 

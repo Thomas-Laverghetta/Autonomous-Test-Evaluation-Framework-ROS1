@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 
 ## Declare ROS package name
-project(demo_clock_library)
+project(keyboard_input)
 
 
 ## Compile as C++11, supported in ROS Kinetic and newer
@@ -19,7 +19,7 @@ add_compile_options(-std=c++11)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 INCLUDE_DIRS include
-LIBRARIES demo_clock_library
+LIBRARIES keyboard_input
 #  CATKIN_DEPENDS std_msgs
 #  DEPENDS system_lib
 )
