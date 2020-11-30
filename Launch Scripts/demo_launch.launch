@@ -2,9 +2,11 @@
 <node pkg="demo_basic_node" type="demo_basic_node_node" name="Node1" output="screen" launch-prefix="xterm -e " >
   <param name="~input1" value="IN" />
   <param name="~output1" value="OUT"/>
+  <param name="LOAD_NODE_STATE" type="bool" value="true"/>
 </node>
 <node pkg="demo_basic_node" type="demo_basic_node_node" name="Node2" output="screen" launch-prefix="xterm -e " >
   <param name="~input1" value="OUT" />
   <param name="~output1" value="IN"/>
+  <param name="LOAD_NODE_STATE" type="bool" value="true"/>
 </node>
 </launch>

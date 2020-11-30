@@ -5,17 +5,15 @@
 void FloatObject::Serialize(char * outBuffer)
 {
 	int index = 0;
-	char * dataRef;
 
-	AddToBuffer(outBuffer, dataRef, index, data);
+	AddToBuffer(outBuffer, (char*)&data, index, data);
 }
 
 void FloatObject::Deserialize(const char * inBuffer)
 {
 	int index = 0;
-	char *dataRef;
 
-	TakeFromBuffer(inBuffer, dataRef, index, data);
+	TakeFromBuffer(inBuffer, (char*)&data, index, data);
 }
 
 int FloatObject::GetObjectSize()

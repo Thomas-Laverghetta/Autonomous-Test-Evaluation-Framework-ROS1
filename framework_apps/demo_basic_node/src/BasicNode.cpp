@@ -72,7 +72,7 @@ void BasicNode::OnReceiveInput()
 }
 
 void BasicNode::Process()
-{
+{   
  	// Example handle termination signal CTRL-C --- Call "termination_handler"
   	if (signal (SIGINT, termination_handler) == SIG_IGN)
     	signal (SIGINT, SIG_IGN);	

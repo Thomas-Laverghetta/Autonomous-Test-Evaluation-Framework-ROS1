@@ -22,6 +22,7 @@ void SaveStateManager::Unregister(SaveState* ss)
 
 void SaveStateManager::SaveAll(string& saveFile)
 {
+	printf("Saving All to %s\n", saveFile.c_str()); fflush(stdout);
 	// Creating binary file
 	ofstream file{ saveFile, std::ios::binary | std::ios::out };
 	for (auto& ss : _SaveStateList) {
@@ -64,6 +65,7 @@ unsigned int FindId(vector<SaveState*>& ss, unsigned int id) {
 }
 void SaveStateManager::LoadAll(string& loadFile)
 {
+	printf("LOADING %s\n", loadFile.c_str()); fflush(stdout);
 	ifstream file{ loadFile, std::ios::binary | std::ios::in };
 	if (!file.is_open()) {
 		printf("ERROR: No Load File %s", loadFile.c_str()); fflush(stdout);

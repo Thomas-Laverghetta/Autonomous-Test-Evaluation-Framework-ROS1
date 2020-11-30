@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   keyboard_input
   std_msgs
+  demo_clock_library
 )
 
 ###################################
@@ -34,6 +35,8 @@ include_directories(
   include 
   ${catkin_INCLUDE_DIRS}
   ${keyboard_input_INCLUDE_DIRS} 
+  ${demo_clock_library_INCLUDE_DIRS} 
+
 )
 
 # Declare a C++ library
@@ -49,5 +52,6 @@ add_library(${PROJECT_NAME} ${SOURCES})
 target_link_libraries(${PROJECT_NAME} 
 ${catkin_LIBRARIES}
 ${keyboard_input_LIBRARIES}  
+  ${demo_clock_library_LIBRARIES}
 )
 

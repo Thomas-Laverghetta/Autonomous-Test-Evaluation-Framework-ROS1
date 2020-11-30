@@ -1,6 +1,10 @@
 #include "Node.h"
 #include "SerialObject.h"
 #include "SaveState.h"
+#include "Clock.h"
+#include <chrono>
+#include <sys/stat.h>
+#include <unistd.h>
 #include <ros/ros.h>
 #include "Keyboard.h"
 #include "std_msgs/ByteMultiArray.h"
@@ -70,13 +74,21 @@ void Topic::Callback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 bool SAVE_STATE_PRESS = false;
 
 void Node::KeyEventListener(){
-	ros::Rate loop_rate(20);
+	ResetClock();
+	
+	// initializing keyboard listener
+	Keyboard_Init();
+
 	while(ros::ok() && !terminate){		
 		Keyboard_Update(0, 1000);	// checking for keyboard input
 		SAVE_STATE_PRESS = (Keyboard_GetLastKey() == 's');
-		Keyboard_Cleanup();
-		loop_rate.sleep();
+
+		// wait for system to save state before checking again
+		while (SAVE_STATE_PRESS){
+			sleep(2);
+		}
 	}
+	Keyboard_Cleanup();
 }
 
 
@@ -123,9 +135,6 @@ void Node::SetNodeName(int argc, char** argv, std::string& nodeName)
 
 void Node::Init(int argc, char** argv)
 {	
-	// initializing keyboard listener
-	Keyboard_Init();
-
 	SetNodeName(argc, argv, _nodeName);
 
 	ros::init(argc, argv, _nodeName);		// init ros system
@@ -136,22 +145,25 @@ void Node::Init(int argc, char** argv)
 
 	for (auto func = initFunctions.begin(); func != initFunctions.end(); func++)	// call init functions from this class
 	  (Node::Get()->*(*func)) ();
+}
 
-	bool load_state = false;
-	if(ros::param::has("LOAD_NODE_STATE")){
-		ros::param::get("LOAD_NODE_STATE", load_state);
-		if (load_state){
-			string fileName = ros::this_node::getName();
-			SaveStateLoad(fileName + ".bin");
-		}
-	}
-
-	// starting key listener thread
-	key_listener_t = thread(&Node::KeyEventListener, this);
+// tests if file exists
+inline bool exists_test3 (const std::string& name) {
+  struct stat buffer;   
+  return (stat (name.c_str(), &buffer) == 0); 
 }
 
 void Node::Loop()
 {
+	string fileName = ros::this_node::getName();
+	fileName = string("/home/autonomous-research/catkin_ws") + fileName + string(".bin");
+	if (exists_test3(fileName)){
+		printf("loading parameter\n"); fflush(stdout);
+		SaveStateLoad(fileName);
+	}
+
+	// starting key listener thread
+	key_listener_t = thread(&Node::KeyEventListener, this);
 	while (terminate == false)	// Loop endlessly until terminated
 	{
 		ros::spinOnce();		// query ROS to process callbacks
@@ -170,8 +182,10 @@ void Node::Loop()
 
 		// save state
 		if (SAVE_STATE_PRESS){
+			printf("Saving State\n"); fflush(stdout);
 			string fileName = ros::this_node::getName();
-			SaveStateSave(fileName + ".bin");
+			fileName = string("/home/autonomous-research/catkin_ws") + fileName + string(".bin");
+			SaveStateSave(fileName);
 
 			SAVE_STATE_PRESS = false;
 		}
