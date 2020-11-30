@@ -18,13 +18,13 @@ find_package(catkin REQUIRED COMPONENTS
 	roscpp 
 	std_msgs 
 	atef_node
-	demo_float_object
+	float_object_msg
 	)
 
 include_directories(
 	${catkin_INCLUDE_DIRS} 
 	${atef_node_INCLUDE_DIRS}
-	${demo_float_object_INCLUDE_DIRS}
+	${float_object_msg_INCLUDE_DIRS}
 	)
 
 ## directories for other necessary libraries
@@ -82,7 +82,7 @@ target_link_libraries(${PROJECT_NAME}_node
  ${QT_LIBRARIES} 
  ${catkin_LIBRARIES}
  ${atef_node_LIBRARIES}
- ${demo_float_object_LIBRARIES}
+ ${float_object_msg_LIBRARIES}
  tinyxml2
  )
 # install(TARGETS sense_plot_app_node RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

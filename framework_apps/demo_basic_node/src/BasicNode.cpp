@@ -42,6 +42,9 @@ void BasicNode::Setup(int argc, char** argv)
 
     // Example of registering "OnExit" to be an exit function called before application exit
     RegisterExitFunction(static_cast<NodeFuncPtr>(&BasicNode::OnExit));
+
+    // registers state object
+    SaveStateClassRegister(GetSaveStateClassID(), BasicNode::New);
 }
 
 void BasicNode::SetNodeName(int argc, char** argv, std::string& nodeName)
@@ -52,10 +55,10 @@ void BasicNode::SetNodeName(int argc, char** argv, std::string& nodeName)
 void BasicNode::AppInit()
 {	
     // Example application specific initialization 
-    output.SetValue(1);
-    input.SetValue(1);
+    output.data = 1;
+    input.data = 1;
 
-    printf("Output=%f : input=%f\n", output.GetValue(), input.GetValue()); fflush(stdout);
+    printf("Output=%f : input=%f\n", output.data, input.data); fflush(stdout);
 
     output.SetFlagged(true);
     recv_input = false;
@@ -78,12 +81,12 @@ void BasicNode::Process()
     if(recv_input)
     {
         // Example of modifying output value and flagging data for publishing
-        output.SetValue(input.GetValue() * 2.0f);
+        output.data = input.data * 2.0f;
         output.SetFlagged(true);
 
         recv_input = false; // reset flag for polling        
     }
-    printf("Output=%f : input=%f\n", output.GetValue(), input.GetValue()); fflush(stdout);
+    printf("Output=%f : input=%f\n", output.data, input.data); fflush(stdout);
     sleep(1);
 }
 

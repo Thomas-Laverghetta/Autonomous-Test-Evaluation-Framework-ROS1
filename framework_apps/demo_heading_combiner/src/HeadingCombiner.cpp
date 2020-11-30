@@ -64,8 +64,8 @@ void HeadingCombiner::SetMode(int argc, char**argv, int& mode)
 // The new coordinate system is flipped and 90 offset from the incoming data.
 void HeadingCombiner::Combine(SerialObject* physicalObject, SerialObject* virtualObject, SerialObject* outputObject)
 {	
-	float physicalHeading = static_cast<FloatObject*>(physicalObject)->GetValue();
-	float virtualHeading = static_cast<FloatObject*>(virtualObject)->GetValue();
+	float physicalHeading = static_cast<FloatObject*>(physicalObject)->data;
+	float virtualHeading = static_cast<FloatObject*>(virtualObject)->data;
 
 	float finalHeading = FLT_MAX;
 
@@ -75,7 +75,7 @@ void HeadingCombiner::Combine(SerialObject* physicalObject, SerialObject* virtua
 		// // COPY TIME TESTING!!!!!
 		// *static_cast<FloatObject*>(outputObject) = *static_cast<FloatObject*>(physicalObject);
 		// // COPY TIME TESTING!!!!!
-		static_cast<FloatObject*>(outputObject)->SetTime(static_cast<FloatObject*>(physicalObject)->GetTime());
+		//static_cast<FloatObject*>(outputObject)->SetTime(static_cast<FloatObject*>(physicalObject)->GetTime());
 	}
 	else if (GetMode() == 1)
 	{
@@ -83,14 +83,14 @@ void HeadingCombiner::Combine(SerialObject* physicalObject, SerialObject* virtua
 		// // COPY TIME TESTING!!!!!
 		// *static_cast<FloatObject*>(outputObject) = *static_cast<FloatObject*>(virtualObject);
 		// // COPY TIME TESTING!!!!!
-		static_cast<FloatObject*>(outputObject)->SetTime(static_cast<FloatObject*>(virtualObject)->GetTime());
+		//static_cast<FloatObject*>(outputObject)->SetTime(static_cast<FloatObject*>(virtualObject)->GetTime());
 	}
 	// else if (GetMode() == 2)	// --- No Augmentation Mode for this Combiner. Either pick physical or virtual
 	// {
 	// }
 
 
-	static_cast<FloatObject*>(outputObject)->SetValue(finalHeading);
+	static_cast<FloatObject*>(outputObject)->data = (finalHeading);
 	printf("Heading:  %f\n", finalHeading);
 }
 

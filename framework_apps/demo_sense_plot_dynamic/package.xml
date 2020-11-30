@@ -26,7 +26,7 @@
   <run_depend>std_msgs</run_depend>
   <build_depend>atef_node</build_depend>
   <run_depend>atef_node</run_depend>
-  <build_depend>demo_float_object</build_depend>
-  <run_depend>demo_float_object</run_depend>
+  <build_depend>float_object_msg</build_depend>
+  <run_depend>float_object_msg</run_depend>
  
 </package>

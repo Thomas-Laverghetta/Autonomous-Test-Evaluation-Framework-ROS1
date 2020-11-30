@@ -54,9 +54,9 @@
   <build_export_depend>atef_node</build_export_depend>
   <exec_depend>atef_node</exec_depend>
 
-  <build_depend>demo_float_object</build_depend> 
-  <build_export_depend>demo_float_object</build_export_depend>
-  <exec_depend>demo_float_object</exec_depend>
+  <build_depend>float_object_msg</build_depend> 
+  <build_export_depend>float_object_msg</build_export_depend>
+  <exec_depend>float_object_msg</exec_depend>
 
   <build_depend>demo_wheel_action</build_depend> 
   <build_export_depend>demo_wheel_action</build_export_depend>

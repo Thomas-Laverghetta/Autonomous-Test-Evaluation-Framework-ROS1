@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   atef_node
   atef_combiner
-  demo_float_object
+  float_object_msg
 )
 
 ###################################
@@ -37,7 +37,7 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${atef_node_INCLUDE_DIRS}  
   ${demo_combiner_INCLUDE_DIRS}  
-  ${demo_float_object_INCLUDE_DIRS}  
+  ${float_object_msg_INCLUDE_DIRS}  
 )
 
 # Declare a C++ executable
@@ -63,7 +63,7 @@ target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   ${atef_node_LIBRARIES}
   ${demo_combiner_LIBRARIES}
-  ${demo_float_object_LIBRARIES}
+  ${float_object_msg_LIBRARIES}
 )
 
 #############

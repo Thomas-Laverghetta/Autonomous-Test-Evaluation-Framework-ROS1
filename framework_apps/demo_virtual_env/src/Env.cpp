@@ -128,10 +128,10 @@ bool Environment::Load(const char* filename)
 
 void Environment::OnReceiveHeading()
 {
-	printf("TIME: %i\n", final_heading.GetTime());	// COPY TIME TESTING!!!!!
+	//printf("TIME: %i\n", final_heading.GetTime());	// COPY TIME TESTING!!!!!
 
 	float minDistance = FLT_MAX;
-	float heading = final_heading.GetValue();
+	float heading = final_heading.data;
 	float headingRadians = heading * 3.14159265f / 180.0f;
 	float Delta = 0.0f;
 
@@ -176,9 +176,9 @@ void Environment::OnReceiveHeading()
 
 	virtual_range = final_heading;		// COPY TIME TESTING!!!
 
-	virtual_range.SetValue(minDistance);		// Set distance for publishing.....
+	virtual_range.data = (minDistance);		// Set distance for publishing.....
 	virtual_range.SetFlagged(true);
-	virtual_angle.SetValue(Delta);				// Angle Found (Delta)
+	virtual_angle.data = (Delta);				// Angle Found (Delta)
 	virtual_angle.SetFlagged(true);
 
 	if(minDistance != FLT_MAX)

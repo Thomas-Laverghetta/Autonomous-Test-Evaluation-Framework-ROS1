@@ -25,7 +25,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   atef_node
-  demo_float_object
+  float_object_msg
   demo_wheel_action
   demo_detected_object
   demo_location_object
@@ -39,7 +39,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${atef_node_INCLUDE_DIRS}
-  ${demo_float_object_INCLUDE_DIRS}
+  ${float_object_msg_INCLUDE_DIRS}
   ${demo_wheel_action_INCLUDE_DIRS}
   ${demo_detected_object_INCLUDE_DIRS}  
   ${demo_location_object_INCLUDE_DIRS}  
@@ -63,7 +63,7 @@ add_executable(${PROJECT_NAME}_node ${SOURCES})
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   ${atef_node_LIBRARIES}
-  ${demo_float_object_LIBRARIES}
+  ${float_object_msg_LIBRARIES}
   ${demo_wheel_action_LIBRARIES}
   ${demo_detected_object_LIBRARIES}
   ${demo_location_object_LIBRARIES}

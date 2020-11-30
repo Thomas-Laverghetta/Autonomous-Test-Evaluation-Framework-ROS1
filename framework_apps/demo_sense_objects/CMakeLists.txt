@@ -25,7 +25,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   atef_node
-  demo_float_object
+  float_object_msg
   demo_point_object
   demo_clock_library
   keyboard_input
@@ -37,7 +37,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${atef_node_INCLUDE_DIRS}
-  ${demo_float_object_INCLUDE_DIRS}
+  ${float_object_msg_INCLUDE_DIRS}
   ${demo_point_object_INCLUDE_DIRS}
   ${demo_clock_library_INCLUDE_DIRS}
   ${demo_keyboard_input_INCLUDE_DIRS}
@@ -58,7 +58,7 @@ add_executable(${PROJECT_NAME}_node ${SOURCES})
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
   ${atef_node_LIBRARIES}
-  ${demo_float_object_LIBRARIES}
+  ${float_object_msg_LIBRARIES}
   ${demo_point_object_LIBRARIES}  
   ${demo_clock_library_LIBRARIES} 
   ${demo_keyboard_input_LIBRARIES} 

@@ -60,10 +60,10 @@ void RangeCombiner::SetMode(int argc, char**argv, int& mode)
 
 void RangeCombiner::Combine(SerialObject* physicalObject, SerialObject* virtualObject, SerialObject* outputObject)
 {	
-	float physicalRange = static_cast<FloatObject*>(physicalObject)->GetValue() + offset;
-	float virtualRange = static_cast<FloatObject*>(virtualObject)->GetValue();
-	long physicalTime = static_cast<FloatObject*>(physicalObject)->GetTime();
-	long virtualTime = static_cast<FloatObject*>(virtualObject)->GetTime();
+	float physicalRange = static_cast<FloatObject*>(physicalObject)->data + offset;
+	float virtualRange = static_cast<FloatObject*>(virtualObject)->data;
+	//long physicalTime = static_cast<FloatObject*>(physicalObject)->GetTime();
+	//long virtualTime = static_cast<FloatObject*>(virtualObject)->GetTime();
 	float finalRange = FLT_MAX;
 
 	if (GetMode() == 0)
@@ -93,19 +93,12 @@ void RangeCombiner::Combine(SerialObject* physicalObject, SerialObject* virtualO
 			*static_cast<FloatObject*>(outputObject) = *static_cast<FloatObject*>(virtualObject);	// COPY TIME TESTING!!!!!
 			finalRange = virtualRange;
 		}
-
-		// NEW
-		// which time to choose between phyical and virtual 
-		if (virtualTime > physicalTime)
-			static_cast<FloatObject*>(outputObject)->SetTime(physicalTime); 
-		else 
-			static_cast<FloatObject*>(outputObject)->SetTime(virtualTime);
 	}
 
 	if(finalRange < minRange || finalRange > maxRange)	// Min/Max Range filter....
 		finalRange = FLT_MAX;
 
-	static_cast<FloatObject*>(outputObject)->SetValue(finalRange);
+	static_cast<FloatObject*>(outputObject)->data = (finalRange);
 	printf("FinalRange:  %f\n", finalRange);	
 }
 

@@ -86,12 +86,12 @@ void demo_sensor_model::Process()
     if(recv_angle_in && recv_range_in)
     {
         //tempRange = AngleError();
-        tempRange = DistanceError()+range_in.GetValue();
+        tempRange = DistanceError()+range_in.data;
         range_out = range_in;
 
 
         // Example of modifying output value and flagging data for publishing
-        range_out.SetValue(tempRange);
+        range_out.data = (tempRange);
         range_out.SetFlagged(true);
 
         printf("OUTRANGE SenModel: %f\n", tempRange);
@@ -103,8 +103,8 @@ void demo_sensor_model::Process()
 
 // Issues with angle error.  Not being used right now.
 float demo_sensor_model::AngleError(){
-    float Range_IN = range_in.GetValue();
-    float Angle_IN = angle_in.GetValue();
+    float Range_IN = range_in.data;
+    float Angle_IN = angle_in.data;
 
     // CCW Error Function: Erf = { f(x) = -0.575*x+163.18 | x = range }
     float ErrorAngleFunction = (-0.575*Range_IN+163.18);

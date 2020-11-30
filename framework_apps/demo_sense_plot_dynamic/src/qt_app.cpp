@@ -115,9 +115,9 @@ void PlotApp::Process()
 
 	if(recv_range && recv_heading)
 	{
-		printf("RANGE TIME: %i| HEADING TIME %i\n", range.GetTime(), heading.GetTime());	// COPY TIME TESTING!!!!!
-		printf("%f,%f\n", range.GetValue(), heading.GetValue());
-		worker.update(range.GetValue(), heading.GetValue());
+		//printf("RANGE TIME: %i| HEADING TIME %i\n", range.GetTime(), heading.GetTime());	// COPY TIME TESTING!!!!!
+		printf("%f,%f\n", range.data, heading.data);
+		worker.update(range.data, heading.data);
 		recv_range = false;
 		recv_heading = false;
 	}

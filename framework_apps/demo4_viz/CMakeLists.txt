@@ -18,14 +18,14 @@ find_package(catkin REQUIRED COMPONENTS
 	roscpp 
 	std_msgs 
 	atef_node
-	demo_float_object
+	float_object_msg
 	demo_location_object
 	)
 
 include_directories(
 	${catkin_INCLUDE_DIRS} 
 	${atef_node_INCLUDE_DIRS}
-	${demo_float_object_INCLUDE_DIRS}
+	${float_object_msg_INCLUDE_DIRS}
 	${demo_location_object_INCLUDE_DIRS}
 	)
 
@@ -84,7 +84,7 @@ target_link_libraries(${PROJECT_NAME}_node
  ${QT_LIBRARIES} 
  ${catkin_LIBRARIES}
  ${atef_node_LIBRARIES}
- ${demo_float_object_LIBRARIES}
+ ${float_object_msg_LIBRARIES}
  ${demo_location_object_LIBRARIES}
  tinyxml2
  )

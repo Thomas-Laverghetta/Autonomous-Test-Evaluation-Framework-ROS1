@@ -25,7 +25,7 @@ public:
 	virtual void Load(std::ifstream& loadFile) = 0;
 
 	/* Repoints SaveState objects to points using state object array.*/
-	virtual void Repoint(const std::vector<SaveState*>& SaveStateList) = 0;
+	virtual void Repoint(const std::vector<SaveState*>& SaveStateList) {};
 	
 	/* Returns class id associated with this object.*/
 	virtual unsigned int GetSaveStateClassId() = 0;

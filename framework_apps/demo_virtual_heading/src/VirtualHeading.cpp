@@ -62,8 +62,7 @@ void VirtualHeading::Process()
     if (angle >= 360)
         angle = 0;
 
-    Heading.SetValue(angle);
-    Heading.SetTime(time);
+    Heading.data = (angle);
     time += 1;
     Heading.SetFlagged(true);
     usleep(500); // Pause    

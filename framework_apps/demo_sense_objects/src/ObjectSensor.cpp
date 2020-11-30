@@ -107,7 +107,7 @@ void ObjectSensor::Process()
 	if(recv_range && recv_heading)
 	{		
 		// current_object_index = (heading.GetValue() / 360.0f) * PointObjectArray::MAX_OBJECTS;
-		current_object_index = (heading.GetValue() / 360.0f) * PointObject::MAX_SECTIONS;
+		current_object_index = (heading.data / 360.0f) * PointObject::MAX_SECTIONS;
 
 		printf("Elapsed=%f\n", ElapsedTime());
 
@@ -139,12 +139,12 @@ void ObjectSensor::Process()
 		}
 		else
 		{		
-			if(range.GetValue() != FLT_MAX)
+			if(range.data != FLT_MAX)
 			{
 				// compute coordinates
-				float headingRadians = heading.GetValue() * 3.14159265f / 180.0f;			
-				float x = range.GetValue() * cos(headingRadians);
-				float y = range.GetValue() * sin(headingRadians);
+				float headingRadians = heading.data * 3.14159265f / 180.0f;			
+				float x = range.data * cos(headingRadians);
+				float y = range.data * sin(headingRadians);
 
 				// add x,y point to current object in focus
 				// temp_array.GetObject(current_object_index).AddPoint(x,y);
@@ -159,7 +159,7 @@ void ObjectSensor::Process()
 			}
 		}
 
-		previous_range = range.GetValue();
+		previous_range = range.data;
 
 		// reset flags for receiving data
 		recv_range = false;
