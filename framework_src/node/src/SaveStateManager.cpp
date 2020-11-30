@@ -90,9 +90,15 @@ void SaveStateManager::LoadAll(string& loadFile)
 
 		// create dynamic state object
 		else {
-			// calling static New(id) using function pointer
-			_SaveStateList.push_back(_classMap.find(classId)->second(objId));
-			_SaveStateList.back()->Load(file);
+			if (_classMap.find(classId) != _classMap.end()){
+				// calling static New(id) using function pointer
+				_SaveStateList.push_back(_classMap.find(classId)->second(objId));
+				_SaveStateList.back()->Load(file);
+			}
+			else{
+				printf("ERROR: Unregistered State Found While Loading from %s\n\a", loadFile.c_str()); fflush(stdout);
+				exit(0);
+			}
 		}
 	}
 

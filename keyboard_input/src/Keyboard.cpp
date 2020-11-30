@@ -8,8 +8,6 @@
 #include <fcntl.h>
 #include <termios.h>
 
-#include <vector>
-
 struct termios oldSettings, newSettings;
 struct timeval tv;
 

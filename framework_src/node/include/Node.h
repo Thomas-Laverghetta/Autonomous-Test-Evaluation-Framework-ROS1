@@ -1,8 +1,10 @@
-#pragma once
+#ifndef ATEF_NODE_H
+#define ATEF_NODE_H
 
 #include <string>
 #include <vector>
 #include <map>
+#include <thread>
 
 class Node;
 class SerialObject;
@@ -38,6 +40,9 @@ private:
 
 	void CallInputFunction(std::string topicName);
 
+	void KeyEventListener();
+	std::thread key_listener_t;
+
 public:
 	static Node* Get();
 	void Init(int argc, char** argv);
@@ -60,3 +65,4 @@ protected:
 	std::string FindTopicName(std::string parameterName);
 };
 
+#endif

@@ -1,7 +1,11 @@
 #include "Node.h"
 #include "SerialObject.h"
+#include "SaveState.h"
 #include <ros/ros.h>
+#include "Keyboard.h"
 #include "std_msgs/ByteMultiArray.h"
+
+using namespace std;
 
 // --------- ROS Topic Implementation ----------
 
@@ -61,8 +65,19 @@ void Topic::Callback(const std_msgs::ByteMultiArray::ConstPtr& msg)
 
 }
 
-// ---------------------------------------------
+// -----------------Keyboard Inputs for SaveState-------------
+// used to sense if key for saving state was pressed
+bool SAVE_STATE_PRESS = false;
 
+void Node::KeyEventListener(){
+	ros::Rate loop_rate(20);
+	while(ros::ok() && !terminate){		
+		Keyboard_Update(0, 1000);	// checking for keyboard input
+		SAVE_STATE_PRESS = (Keyboard_GetLastKey() == 's');
+		Keyboard_Cleanup();
+		loop_rate.sleep();
+	}
+}
 
 
 // --------- ROS Node Implementation ----------
@@ -108,6 +123,9 @@ void Node::SetNodeName(int argc, char** argv, std::string& nodeName)
 
 void Node::Init(int argc, char** argv)
 {	
+	// initializing keyboard listener
+	Keyboard_Init();
+
 	SetNodeName(argc, argv, _nodeName);
 
 	ros::init(argc, argv, _nodeName);		// init ros system
@@ -118,6 +136,18 @@ void Node::Init(int argc, char** argv)
 
 	for (auto func = initFunctions.begin(); func != initFunctions.end(); func++)	// call init functions from this class
 	  (Node::Get()->*(*func)) ();
+
+	bool load_state = false;
+	if(ros::param::has("LOAD_NODE_STATE")){
+		ros::param::get("LOAD_NODE_STATE", load_state);
+		if (load_state){
+			string fileName = ros::this_node::getName();
+			SaveStateLoad(fileName + ".bin");
+		}
+	}
+
+	// starting key listener thread
+	key_listener_t = thread(&Node::KeyEventListener, this);
 }
 
 void Node::Loop()
@@ -136,6 +166,14 @@ void Node::Loop()
 				(*topic)->TopicObject().SetFlagged(false);
 				(*topic)->Publish();
 			}
+		}
+
+		// save state
+		if (SAVE_STATE_PRESS){
+			string fileName = ros::this_node::getName();
+			SaveStateSave(fileName + ".bin");
+
+			SAVE_STATE_PRESS = false;
 		}
 	}
 
